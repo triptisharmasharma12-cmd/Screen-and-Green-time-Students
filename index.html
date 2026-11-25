@@ -1,0 +1,4350 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<title>Student Questionnaire - Screen Time and Green Time</title>
+
+
+<style>
+
+/* =========================================================
+   BASIC PAGE
+   ========================================================= */
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:"Noto Sans Devanagari",Arial,Helvetica,sans-serif;
+  background:linear-gradient(135deg,#eaf3ff,#f7fbff);
+  color:#1f2937;
+  min-height:100vh;
+}
+
+.wrap{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+}
+
+.card{
+  width:min(950px,100%);
+  min-height:650px;
+  background:#ffffff;
+  border-radius:24px;
+  box-shadow:0 12px 40px rgba(0,0,0,.12);
+  padding:40px;
+  display:flex;
+  flex-direction:column;
+}
+
+
+/* =========================================================
+   PROGRESS BAR
+   ========================================================= */
+
+.progress{
+  height:8px;
+  background:#e5e7eb;
+  border-radius:8px;
+  overflow:hidden;
+  margin-bottom:28px;
+}
+
+.progress>div{
+  height:100%;
+  background:#1976d2;
+  transition:.25s;
+}
+
+
+/* =========================================================
+   HEADINGS
+   ========================================================= */
+
+h1{
+  font-size:29px;
+  margin:0 0 12px;
+  color:#1565c0;
+  line-height:1.35;
+}
+
+h2{
+  font-size:24px;
+  line-height:1.4;
+  margin:0 0 16px;
+  color:#1976d2;
+}
+
+h3{
+  color:#1565c0;
+}
+
+
+/* =========================================================
+   TEXT
+   ========================================================= */
+
+.subtitle{
+  color:#5f6b7a;
+  line-height:1.6;
+  margin-bottom:22px;
+}
+
+.question{
+  flex:1;
+  overflow:auto;
+}
+
+.question p{
+  line-height:1.6;
+  font-size:17px;
+}
+
+
+/* =========================================================
+   INPUTS
+   ========================================================= */
+
+label{
+  display:block;
+  font-size:17px;
+  margin:14px 0 8px;
+  font-weight:600;
+}
+
+.option{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  font-weight:400;
+
+  background:#f7fbff;
+
+  border:1px solid #d7e7f7;
+  border-radius:12px;
+
+  padding:13px;
+  margin:9px 0;
+
+  cursor:pointer;
+
+  transition:.2s;
+}
+
+.option:hover{
+  background:#edf6ff;
+  border-color:#90caf9;
+}
+
+.option input{
+  margin-top:4px;
+  transform:scale(1.15);
+}
+
+input[type=text],
+input[type=number],
+input[type=date],
+select,
+textarea{
+  width:100%;
+  padding:13px 14px;
+
+  border:1px solid #cbd5e1;
+  border-radius:10px;
+
+  font-size:16px;
+  outline:none;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+  border-color:#1976d2;
+
+  box-shadow:
+  0 0 0 3px rgba(25,118,210,.10);
+}
+
+
+/* =========================================================
+   GRID
+   ========================================================= */
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+
+
+/* =========================================================
+   BOX
+   ========================================================= */
+
+.box{
+  border:1px solid #d7e7f7;
+
+  border-radius:14px;
+
+  padding:18px;
+
+  margin-top:15px;
+
+  background:#fbfdff;
+}
+
+.box h3{
+  margin:0 0 14px;
+
+  font-size:18px;
+
+  color:#1565c0;
+
+  text-align:center;
+}
+
+
+/* =========================================================
+   OTHER
+   ========================================================= */
+
+.other-box{
+  margin-top:12px;
+  margin-bottom:15px;
+}
+
+.other-box label{
+  color:#1565c0;
+  font-size:15px;
+}
+
+
+/* =========================================================
+   GENERAL QUESTION IMAGE
+   ========================================================= */
+
+.question-image-wrap{
+
+  width:100%;
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+  margin:18px 0 24px;
+}
+
+.question-image{
+
+  width:100%;
+
+  max-width:760px;
+
+  height:340px;
+
+  object-fit:contain;
+
+  object-position:center;
+
+  display:block;
+
+  margin:auto;
+
+  border-radius:16px;
+
+  border:1px solid #d7e7f7;
+
+  background:#ffffff;
+
+  padding:8px;
+}
+
+
+/* =========================================================
+   LARGE IMAGE
+   For mind maps, education, sleep images, etc.
+   ========================================================= */
+
+.large-question-image{
+
+  width:100%;
+
+  max-width:800px;
+
+  height:420px;
+
+  object-fit:contain;
+
+  object-position:center;
+
+  display:block;
+
+  margin:18px auto 25px;
+
+  border-radius:16px;
+
+  border:1px solid #d7e7f7;
+
+  background:#ffffff;
+
+  padding:8px;
+}
+
+
+/* Green Time question images */
+.green-time-image{
+  width:100%;
+  max-width:760px;
+  height:300px;
+  object-fit:contain;
+  display:block;
+  margin:18px auto 24px;
+  border-radius:16px;
+  border:1px solid #d7e7f7;
+  background:#ffffff;
+  padding:8px;
+}
+
+/* =========================================================
+   IMAGE OPTIONS
+   Used for Urban/Suburban/Rural and family structure
+   ========================================================= */
+
+.image-options{
+
+  display:grid;
+
+  grid-template-columns:
+  repeat(3,1fr);
+
+  gap:20px;
+
+  margin-top:20px;
+
+  align-items:start;
+}
+
+.image-option{
+
+  border:1px solid #d7e7f7;
+
+  border-radius:16px;
+
+  background:#f7fbff;
+
+  padding:12px;
+
+  cursor:pointer;
+
+  transition:.2s;
+
+  text-align:center;
+}
+
+.image-option:hover{
+
+  background:#edf6ff;
+
+  border-color:#90caf9;
+
+  transform:translateY(-2px);
+}
+
+.image-option img{
+
+  width:100%;
+
+  height:250px;
+
+  object-fit:contain;
+
+  object-position:center;
+
+  border-radius:12px;
+
+  display:block;
+
+  margin-bottom:12px;
+
+  background:#ffffff;
+
+  padding:5px;
+}
+
+.image-option label{
+
+  margin:0;
+
+  font-weight:500;
+
+  cursor:pointer;
+
+  text-align:left;
+}
+
+.image-option input{
+
+  margin-right:7px;
+
+  transform:scale(1.15);
+}
+
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+.nav{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  gap:12px;
+
+  margin-top:25px;
+}
+
+button{
+
+  border:0;
+
+  border-radius:10px;
+
+  padding:13px 24px;
+
+  font-size:16px;
+
+  font-weight:700;
+
+  cursor:pointer;
+
+  transition:.2s;
+}
+
+.back{
+
+  background:#e5e7eb;
+
+  color:#111827;
+}
+
+.back:hover{
+
+  background:#d1d5db;
+}
+
+.next,
+.submit{
+
+  background:#1976d2;
+
+  color:#ffffff;
+}
+
+.next:hover,
+.submit:hover{
+
+  background:#1565c0;
+}
+
+
+/* =========================================================
+   ERROR
+   ========================================================= */
+
+.error{
+
+  color:#b91c1c;
+
+  background:#fee2e2;
+
+  padding:10px;
+
+  border-radius:8px;
+
+  margin-top:10px;
+
+  display:none;
+}
+
+
+/* =========================================================
+   SUCCESS
+   ========================================================= */
+
+.success{
+
+  text-align:center;
+
+  padding:50px 20px;
+}
+
+.success h1{
+
+  color:#1565c0;
+}
+
+
+/* =========================================================
+   INSTRUCTIONS
+   ========================================================= */
+
+.instructions{
+
+  line-height:1.7;
+}
+
+.instructions li{
+
+  margin-bottom:10px;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media(max-width:700px){
+
+  .wrap{
+    padding:12px;
+  }
+
+  .card{
+
+    padding:24px;
+
+    min-height:95vh;
+
+    border-radius:18px;
+  }
+
+  .grid{
+
+    grid-template-columns:1fr;
+  }
+
+  .image-options{
+
+    grid-template-columns:1fr;
+  }
+
+  .image-option img{
+
+    height:300px;
+  }
+
+  .question-image{
+
+    height:330px;
+  }
+
+  .large-question-image{
+
+    height:380px;
+  }
+
+  h1{
+
+    font-size:24px;
+  }
+
+  h2{
+
+    font-size:20px;
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="wrap">
+
+<div class="card">
+
+
+<div class="progress">
+
+<div id="bar"></div>
+
+</div>
+
+
+<div id="app"></div>
+
+
+<div class="nav" id="nav">
+
+<button
+class="back"
+id="back"
+onclick="prev()">
+
+Back / पीछे
+
+</button>
+
+
+<button
+class="next"
+id="next"
+onclick="next()">
+
+Next / आगे
+
+</button>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<script>
+
+
+/* =========================================================
+   GOOGLE APPS SCRIPT URL
+   KEEP THIS URL
+   ========================================================= */
+
+const SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbywOCHDQMwSCxJh7mlG8iXBv2KuEikW_M7PRydUm0W3ucQ1sSE3CycJGbutk5viv7bQ8Q/exec";
+
+
+/* =========================================================
+   IMAGE FILE NAMES
+   ========================================================= */
+
+const IMG = {
+
+
+  /* AREA */
+
+  urban:
+  "Urban Life.png",
+
+  suburban:
+  "Suburban Life.png",
+
+  rural:
+  "Rural Life.png",
+
+
+  /* DEMOGRAPHIC */
+
+  education:
+  "highest education.jpg",
+
+  joint:
+  "joint family.png",
+
+  nuclear:
+  "nuclear family.png",
+
+  singleParent:
+  "single parent family.png",
+
+  children:
+  "Children.png",
+
+  occupation:
+  "occupation.png",
+
+   income:
+   "income.png",
+
+  parentsMonitor:
+  "parents monitor.png",
+
+  health:
+  "health related.png",
+
+
+  /* SCREEN TIME */
+
+  deviceType:
+  "device type.png",
+     
+  devices:
+   "devices.png",
+   
+   phone:
+   "phone.png",
+   
+   deviceuse:
+"deviceuse.png",
+   
+  breaks:
+  "breaks.png",
+
+  deviceTime:
+  "when to use digital device.png",
+
+  purpose:
+  "purpose.png",
+
+  recreational:
+  "recreational.png",
+
+total:
+"total image.png",
+   
+ activeRecreational:
+"active recreational time image.png",
+
+  educationalTime:
+  "educational time.png",
+
+
+  /* SLEEP */
+
+  sleepHours:
+  "sleep hours.png",
+
+  wakeUp:
+  "wake up time.png",
+
+  sleepTime:
+  "sleep time.png",
+
+  daytimeNap:
+  "daytime nap.png"
+
+};
+
+
+/* =========================================================
+   IMAGE FUNCTION
+   ========================================================= */
+
+function image(file,alt="Question image"){
+
+const encodedFile = encodeURI(file);
+const isDeviceUseImage = /device use\.png/i.test(file);
+const errorHandler = isDeviceUseImage
+  ? "if(!this.dataset.tryImages){this.dataset.tryImages='1';this.src='images/device%20use.png';}else if(!this.dataset.tryPlural){this.dataset.tryPlural='1';this.src='device%20uses.png';}else if(!this.dataset.tryUsage){this.dataset.tryUsage='1';this.src='device%20usage.png';}else{this.style.display='none';}"
+  : "if(!this.dataset.tryImages){this.dataset.tryImages='1';this.src='images/" + encodedFile + "';}else{this.style.display='none';}";
+
+return `
+
+<div class="question-image-wrap">
+
+<img
+
+class="question-image"
+
+src="${encodedFile}"
+
+data-file="${encodedFile}"
+
+alt="${alt}"
+
+onerror="${errorHandler}">
+
+</div>
+
+`;
+
+}
+
+
+/* =========================================================
+   LARGE IMAGE FUNCTION
+   ========================================================= */
+
+function largeImage(file,alt="Question image"){
+
+return `
+
+<img
+
+class="large-question-image"
+
+src="${encodeURI(file)}"
+
+alt="${alt}"
+
+onerror="this.style.display='none'">
+
+`;
+
+}
+
+
+/* =========================================================
+   NORMAL OPTIONS
+   ========================================================= */
+
+function A(v){
+
+return v.map(x=>`
+
+<label class="option">
+
+<input
+
+type="${x.type || 'radio'}"
+
+name="${x.name}"
+
+value="${x.value}"
+
+${x.required ? "required" : ""}>
+
+<span>
+
+${x.label}
+
+</span>
+
+</label>
+
+`).join("");
+
+}
+
+
+/* =========================================================
+   IMAGE OPTIONS
+   ========================================================= */
+
+function imageOptions(name,items){
+
+return `
+
+<div class="image-options">
+
+${items.map(x=>`
+
+<div class="image-option">
+
+
+<img
+
+src="${encodeURI(x.image)}"
+
+alt="${x.alt || x.label}"
+
+onerror="this.style.display='none'">
+
+
+<label>
+
+<input
+
+type="radio"
+
+name="${name}"
+
+value="${x.value}"
+
+required>
+
+${x.label}
+
+</label>
+
+
+</div>
+
+`).join("")}
+
+</div>
+
+`;
+
+}
+
+
+
+/* =========================================================
+   GREEN TIME IMAGE
+   ========================================================= */
+function greenImage(file, alt="Green Time question image"){
+  const encoded = encodeURI(file);
+  const baseName = file.split("/").pop();
+  const stem = baseName.replace(/\\.[^.]+$/, "");
+  const candidates = [
+    "images/" + baseName,
+    baseName,
+    "images/" + stem.toLowerCase() + ".png",
+    stem.toLowerCase() + ".png",
+    "images/" + stem + ".PNG",
+    stem + ".PNG",
+    "images/" + stem + ".jpg",
+    stem + ".jpg",
+    "images/" + stem + ".jpeg",
+    stem + ".jpeg"
+  ];
+  return `
+    <img class="green-time-image"
+         src="${encodeURI(candidates[0])}"
+         alt="${alt}"
+         data-image-candidates='${JSON.stringify(candidates)}'
+         onerror="(function(img){
+           const list=JSON.parse(img.dataset.imageCandidates || '[]');
+           const next=(Number(img.dataset.imageTry || 0))+1;
+           img.dataset.imageTry=next;
+           if(next < list.length){img.src=encodeURI(list[next]);}
+           else{img.style.display='none';}
+         })(this);">
+  `;
+}
+
+/* =========================================================
+   QUESTIONS
+   ========================================================= */
+
+const questions = [
+
+
+/* =========================================================
+   1. DEMOGRAPHIC INFORMATION
+   ========================================================= */
+
+{
+
+title:
+"1. Student Information / विद्यार्थी की जानकारी",
+
+html:`
+
+<p
+style="
+color:#5f6b7a;
+line-height:1.6;
+margin-bottom:24px;
+">
+
+Please tell us a little about yourself. If you do not know an answer about your family, choose “I do not know” where available.
+
+<br><br>
+
+कृपया अपने बारे में कुछ जानकारी दें। यदि आपको अपने परिवार से जुड़ी किसी जानकारी का पता नहीं है, तो जहाँ विकल्प दिया गया है वहाँ “मुझे नहीं पता” चुनें।
+
+</p>
+
+
+<label>
+Your name / आपका नाम
+</label>
+
+<input
+name="name"
+type="text"
+required>
+
+
+<label>
+Your age / आपकी आयु
+</label>
+
+<input
+name="age"
+type="number"
+min="10"
+max="18"
+required>
+
+
+<label>
+Your class / आपकी कक्षा
+</label>
+
+${A([
+
+{
+name:"grade",
+value:"Class 6",
+label:"Class 6 / कक्षा 6",
+required:true
+},
+
+{
+name:"grade",
+value:"Class 7",
+label:"Class 7 / कक्षा 7",
+required:true
+},
+
+{
+name:"grade",
+value:"Class 8",
+label:"Class 8 / कक्षा 8",
+required:true
+}
+
+])}
+
+
+
+
+`
+
+},
+
+
+/* =========================================================
+   2. AREA
+   ========================================================= */
+
+{
+
+title:
+"2. What kind of area do you live in? / आप किस तरह के इलाके में रहते हैं?",
+
+html:
+
+imageOptions(
+
+"area",
+
+[
+
+{
+value:"Urban",
+label:"Urban / शहरी",
+image:IMG.urban
+},
+
+{
+value:"Suburban",
+label:"Suburban / उपनगरीय",
+image:IMG.suburban
+},
+
+{
+value:"Rural",
+label:"Rural / ग्रामीण",
+image:IMG.rural
+}
+
+]
+
+)
+
+},
+
+
+/* =========================================================
+   3. HIGHEST EDUCATION
+   ========================================================= */
+
+{
+
+title:
+"3. What is the highest level of education completed by your mother, father, or guardian? / आपकी माता, पिता या अभिभावक ने अधिकतम कितनी पढ़ाई पूरी की है?",
+
+html:
+
+largeImage(
+IMG.education,
+"Highest education"
+)
+
++
+
+A([
+
+{
+name:"education",
+value:"High School",
+label:"High School / हाई स्कूल",
+required:true
+},
+
+{
+name:"education",
+value:"Intermediate",
+label:"Intermediate / इंटरमीडिएट",
+required:true
+},
+
+{
+name:"education",
+value:"Graduate",
+label:"Graduate / स्नातक",
+required:true
+},
+
+{
+name:"education",
+value:"Post Graduate",
+label:"Post Graduate / स्नातकोत्तर",
+required:true
+},
+
+{
+name:"education",
+value:"Doctorate",
+label:"Doctorate / डॉक्टरेट",
+required:true
+},
+
+{
+name:"education",
+value:"Other",
+label:"Other / अन्य",
+required:true
+},
+
+{
+name:"education",
+value:"Do not know",
+label:"I do not know / मुझे नहीं पता",
+required:true
+}
+
+])
+
++
+
+`
+
+<div class="other-box">
+
+<label>
+If Other, please specify / यदि अन्य, तो कृपया लिखें
+</label>
+
+<input
+name="education_other"
+type="text"
+placeholder="Please specify / कृपया लिखें">
+
+</div>
+
+`
+
+},
+
+
+/* =========================================================
+   4. FAMILY STRUCTURE
+   ========================================================= */
+
+{
+
+title:
+"4. What type of family do you live in? / आप किस प्रकार के परिवार में रहते हैं?",
+
+html:
+
+imageOptions(
+
+"family_structure",
+
+[
+
+{
+value:"Joint Family",
+label:"Joint Family / संयुक्त परिवार",
+image:IMG.joint
+},
+
+{
+value:"Nuclear Family",
+label:"Nuclear Family / एकल परिवार",
+image:IMG.nuclear
+},
+
+{
+value:"Single Parent",
+label:"Single Parent / एकल अभिभावक परिवार",
+image:IMG.singleParent
+}
+
+]
+
+)
+
+},
+
+
+/* =========================================================
+   5. NUMBER OF CHILDREN
+   ========================================================= */
+
+{
+  title: "5. Number of brothers and sisters / भाई-बहनों की संख्या",
+
+  html:
+    image(IMG.children, "Number of children") +
+
+    A([
+      {
+        name: "number_children",
+        value: "0",
+        label: "0",
+        required: true
+      },
+      {
+        name: "number_children",
+        value: "1",
+        label: "1",
+        required: true
+      },
+      {
+        name: "number_children",
+        value: "2",
+        label: "2",
+        required: true
+      },
+      {
+        name: "number_children",
+        value: "3",
+        label: "3",
+        required: true
+      },
+      {
+        name: "number_children",
+        value: "More than 3",
+        label: "More than 3 / 3 से अधिक",
+        required: true
+      }
+    ])
+},
+/* =========================================================
+   6. OCCUPATION
+   ========================================================= */
+
+{
+
+title:
+"6. What is the main occupation of your parent(s) or guardian? / आपके माता-पिता या अभिभावक का मुख्य व्यवसाय क्या है?",
+
+html:
+
+largeImage(
+IMG.occupation,
+"Occupation"
+)
+
++
+
+`
+
+<input
+
+name="occupation"
+
+type="text"
+
+required
+
+placeholder=
+"If you know, enter the occupation / यदि पता हो, तो व्यवसाय लिखें">
+
+`
+
+},
+
+
+/* =========================================================
+   7. INCOME
+   ========================================================= */
+
+{
+
+title:
+"7. Approximate annual family income / परिवार की अनुमानित वार्षिक आय",
+
+  html:
+    image(IMG.income, "Annual family income") +
+
+A([
+
+{
+name:"annual_income",
+value:"Less than 1 lakh",
+label:"Less than 1 lakh / 1 लाख से कम",
+required:true
+},
+
+{
+name:"annual_income",
+value:"1–3 lakh",
+label:"1–3 lakh / 1–3 लाख",
+required:true
+},
+
+{
+name:"annual_income",
+value:"3–5 lakh",
+label:"3–5 lakh / 3–5 लाख",
+required:true
+},
+
+{
+name:"annual_income",
+value:"5–7.5 lakh",
+label:"5–7.5 lakh / 5–7.5 लाख",
+required:true
+},
+
+{
+name:"annual_income",
+value:"7.5–10 lakh",
+label:"7.5–10 lakh / 7.5–10 लाख",
+required:true
+},
+
+{
+name:"annual_income",
+value:"10–20 lakh",
+label:"10–20 lakh / 10–20 लाख",
+required:true
+},
+
+{
+name:"annual_income",
+value:"More than 20 lakh",
+label:"More than 20 lakh / 20 लाख से अधिक",
+required:true
+},
+
+{
+name:"annual_income",
+value:"Prefer not to say",
+label:"Prefer not to say / बताना नहीं चाहते",
+required:true
+},
+
+{
+name:"annual_income",
+value:"Do not know",
+label:"I do not know / मुझे नहीं पता",
+required:true
+}
+
+])
+
+},
+
+
+/* =========================================================
+   8. CONTENT MONITORING
+   ========================================================= */
+
+{
+
+title:
+"8. Content monitoring / सामग्री पर निगरानी",
+
+html:
+
+image(
+IMG.parentsMonitor,
+"Parents monitoring content"
+)
+
++
+
+`
+
+<p>
+
+Do you monitor what content you accesses?
+
+<br>
+
+क्या आप अपने आपके द्वारा देखी या उपयोग की जाने वाली
+सामग्री पर नज़र रखते हैं?
+
+</p>
+
+`
+
++
+
+A([
+
+{
+name:"content_monitoring",
+value:"Yes",
+label:"Yes / हाँ",
+required:true
+},
+
+{
+name:"content_monitoring",
+value:"No",
+label:"No / नहीं",
+required:true
+}
+
+])
+
+},
+
+
+/* =========================================================
+   9. HEALTH AND DAILY ROUTINE
+   ========================================================= */
+
+{
+
+title:
+"9. Health and Daily Routine / स्वास्थ्य और दैनिक दिनचर्या",
+
+html:
+
+largeImage(
+IMG.health,
+"Health and daily routine"
+)
+
++
+
+`
+<div class="health-screening-questions">
+
+<p>
+<strong>1. Do you take any medicines regularly?</strong>
+<br>
+क्या आप नियमित रूप से कोई दवा लेते हैं?
+</p>
+`
+
++
+
+A([
+{
+name:"health_medicines",
+value:"Yes",
+label:"Yes / हाँ",
+required:true
+},
+{
+name:"health_medicines",
+value:"No",
+label:"No / नहीं",
+required:true
+},
+{
+name:"health_medicines",
+value:"Not sure",
+label:"Not sure / निश्चित नहीं",
+required:true
+}
+])
+
++
+
+`
+<hr style="border:0;border-top:1px solid #d7e7f7;margin:22px 0;">
+<p>
+<strong>2. Do you visit a doctor or hospital regularly for any health-related reason?</strong>
+<br>
+क्या आप किसी स्वास्थ्य संबंधी कारण से नियमित रूप से डॉक्टर या अस्पताल जाते हैं?
+</p>
+`
+
++
+
+A([
+{
+name:"health_regular_visits",
+value:"Yes",
+label:"Yes / हाँ",
+required:true
+},
+{
+name:"health_regular_visits",
+value:"No",
+label:"No / नहीं",
+required:true
+},
+{
+name:"health_regular_visits",
+value:"Not sure",
+label:"Not sure / निश्चित नहीं",
+required:true
+}
+])
+
++
+
+`
+<hr style="border:0;border-top:1px solid #d7e7f7;margin:22px 0;">
+<p>
+<strong>3. Do you experience any difficulty while sitting for a long time, concentrating on a task, or responding to instructions?</strong>
+<br>
+क्या आपको लंबे समय तक बैठने, किसी कार्य पर ध्यान केंद्रित करने या निर्देशों का पालन करने में कोई कठिनाई होती है?
+</p>
+`
+
++
+
+A([
+{
+name:"health_sitting_concentration",
+value:"Yes",
+label:"Yes / हाँ",
+required:true
+},
+{
+name:"health_sitting_concentration",
+value:"No",
+label:"No / नहीं",
+required:true
+},
+{
+name:"health_sitting_concentration",
+value:"Not sure",
+label:"Not sure / निश्चित नहीं",
+required:true
+}
+])
+
++
+
+`
+<hr style="border:0;border-top:1px solid #d7e7f7;margin:22px 0;">
+<p>
+<strong>4. Do you need any special assistance or arrangements during school activities?</strong>
+<br>
+क्या आपको स्कूल की गतिविधियों के दौरान किसी विशेष सहायता या व्यवस्था की आवश्यकता होती है?
+</p>
+`
+
++
+
+A([
+{
+name:"health_school_assistance",
+value:"Yes",
+label:"Yes / हाँ",
+required:true
+},
+{
+name:"health_school_assistance",
+value:"No",
+label:"No / नहीं",
+required:true
+},
+{
+name:"health_school_assistance",
+value:"Not sure",
+label:"Not sure / निश्चित नहीं",
+required:true
+}
+])
+
++
+
+`
+<hr style="border:0;border-top:1px solid #d7e7f7;margin:22px 0;">
+<p>
+<strong>5. Has you ever been advised to avoid any physical or mental activity for health-related reasons?</strong>
+<br>
+क्या आपको स्वास्थ्य संबंधी कारणों से कभी किसी शारीरिक या मानसिक गतिविधि से बचने की सलाह दी गई है?
+</p>
+`
+
++
+
+A([
+{
+name:"health_activity_restriction",
+value:"Yes",
+label:"Yes / हाँ",
+required:true
+},
+{
+name:"health_activity_restriction",
+value:"No",
+label:"No / नहीं",
+required:true
+},
+{
+name:"health_activity_restriction",
+value:"Not sure",
+label:"Not sure / निश्चित नहीं",
+required:true
+}
+])
+
++
+
+`
+<hr style="border:0;border-top:1px solid #d7e7f7;margin:22px 0;">
+<p>
+<strong>6. Is there anything about your health or daily routine that you would like to tell the researcher before taking part?</strong>
+<br>
+क्या आपके के स्वास्थ्य या दैनिक दिनचर्या से जुड़ी कोई ऐसी बात है जिसके बारे में आप सोचते हैं कि अध्ययन की गतिविधियों से पहले शोधकर्ता को जानना चाहिए?
+</p>
+`
+
++
+
+A([
+{
+name:"health_additional_information",
+value:"Yes",
+label:"Yes / हाँ",
+required:true
+},
+{
+name:"health_additional_information",
+value:"No",
+label:"No / नहीं",
+required:true
+},
+{
+name:"health_additional_information",
+value:"Not sure",
+label:"Not sure / निश्चित नहीं",
+required:true
+}
+])
+
+},
+
+
+/* =========================================================
+   10. CONDITIONS
+   ========================================================= */
+
+{
+
+title:
+"10. Conditions / स्थितियाँ",
+
+html:`
+
+<p>
+
+Have you ever been diagnosed with any of the following conditions?
+have any of the following conditions that may affect
+participation in this study?
+
+<br><br>
+
+आपकी जानकारी के अनुसार, क्या आपके में निम्नलिखित
+में से कोई स्थिति है?
+
+</p>
+
+`
+
++
+
+A([
+
+{
+type:"checkbox",
+name:"conditions",
+value:"ADHD",
+label:"ADHD"
+},
+
+{
+type:"checkbox",
+name:"conditions",
+value:
+"Specific learning difficulty, such as Dyslexia",
+label:
+"Specific learning difficulty, such as Dyslexia / विशिष्ट अधिगम संबंधी कठिनाई, जैसे डिस्लेक्सिया"
+},
+
+{
+type:"checkbox",
+name:"conditions",
+value:"Neurological condition",
+label:
+"Neurological condition / तंत्रिका संबंधी स्थिति"
+},
+
+{
+type:"checkbox",
+name:"conditions",
+value:"None",
+label:
+"None / इनमें से कोई नहीं"
+},
+
+{
+type:"checkbox",
+name:"conditions",
+value:"Prefer not to disclose",
+label:
+"Prefer not to disclose / बताना नहीं चाहते"
+}
+
+])
+
+},
+
+
+/* =========================================================
+   ACTIVE SCREEN TIME 1
+   DEVICE TYPES
+   ========================================================= */
+
+{
+
+title:
+"Active Screen Time Measurement 1 / स्क्रीन टाइम मापन 1",
+
+html:
+
+image(
+IMG.deviceType,
+"Types of digital devices"
+)
+
++
+
+`
+
+<p>
+
+Which digital devices are available for you to use at home?
+
+<br>
+
+[You can choose multiple options]
+
+<br>
+
+आपके घर में कौन-कौन से डिजिटल उपकरण हैं?
+
+<br>
+
+[आप एक से अधिक विकल्प चुन सकते हैं]
+
+</p>
+
+`
+
++
+
+A([
+
+{
+type:"checkbox",
+name:"home_devices",
+value:"Computer",
+label:"Computer / कंप्यूटर"
+},
+
+{
+type:"checkbox",
+name:"home_devices",
+value:"Smartphone",
+label:"Smartphone / स्मार्टफोन"
+},
+
+{
+type:"checkbox",
+name:"home_devices",
+value:"iPad or tablets",
+label:"iPad or tablets / आइपैड या टैबलेट"
+},
+
+{
+type:"checkbox",
+name:"home_devices",
+value:"Laptop",
+label:"Laptop / लैपटॉप"
+},
+
+{
+type:"checkbox",
+name:"home_devices",
+value:"Television",
+label:"Television / टेलीविज़न"
+},
+
+{
+type:"checkbox",
+name:"home_devices",
+value:"Other",
+label:"Other / अन्य"
+}
+
+])
+
++
+
+`
+
+<div class="other-box">
+
+<label>
+If Other, please specify / यदि अन्य, तो कृपया लिखें
+</label>
+
+<input
+
+name="home_devices_other"
+
+type="text"
+
+placeholder=
+"Please specify / कृपया लिखें">
+
+</div>
+
+`
+
+},
+
+
+/* =========================================================
+   ACTIVE SCREEN TIME 2
+   TOTAL DIGITAL DEVICES
+   ========================================================= */
+
+{
+
+title:
+"Active Screen Time Measurement 2 / स्क्रीन टाइम मापन 2",
+
+
+  html:
+    image(IMG.devices, "devices") +
+
+`
+
+<p>
+
+How many digital devices are there in your home in total
+(e.g., smartphones, tablets/iPads, computers, laptops, etc.)?
+
+<br><br>
+
+आपके परिवार में कुल कितने डिजिटल उपकरण हैं
+(जैसे स्मार्टफोन, टैबलेट/आईपैड, कंप्यूटर, लैपटॉप आदि)?
+
+</p>
+
+`
+
++
+
+A([
+
+{
+name:"total_digital_devices",
+value:"0",
+label:"0",
+required:true
+},
+
+{
+name:"total_digital_devices",
+value:"1–2",
+label:"1–2",
+required:true
+},
+
+{
+name:"total_digital_devices",
+value:"3–4",
+label:"3–4",
+required:true
+},
+
+{
+name:"total_digital_devices",
+value:"5–6",
+label:"5–6",
+required:true
+},
+
+{
+name:"total_digital_devices",
+value:"More than 6",
+label:"More than 6 / 6 से अधिक",
+required:true
+}
+
+])
+
+},
+
+
+/* =========================================================
+   ACTIVE SCREEN TIME 3
+   PERSONAL MOBILE
+   ========================================================= */
+
+{
+
+title:
+"Active Screen Time Measurement 3 / स्क्रीन टाइम मापन 3",
+
+
+  html:
+    image(IMG.phone, "phone") +`
+
+<p>
+
+Do you own a personal mobile phone?
+
+<br>
+
+क्या आपके पास अपना व्यक्तिगत मोबाइल फ़ोन है?
+
+</p>
+
+`
+
++
+
+A([
+
+{
+name:"personal_mobile",
+value:"Yes",
+label:"Yes / हाँ",
+required:true
+},
+
+{
+name:"personal_mobile",
+value:"No",
+label:"No / नहीं",
+required:true
+}
+
+])
+
+},
+
+
+/* =========================================================
+   ACTIVE SCREEN TIME 4
+   MOST USED DEVICE
+   ========================================================= */
+
+{
+
+title:
+"Active Screen Time Measurement 4 / स्क्रीन टाइम मापन 4",
+
+
+  html:
+    image(IMG.deviceuse, "Deviceuse") +`
+
+<p>
+
+Which digital device do you use most often?
+
+<br>
+
+[You can choose multiple options]
+
+<br>
+
+आप ज़्यादातर कौन सा डिवाइस इस्तेमाल करता है?
+
+<br>
+
+[आप एक से अधिक विकल्प चुन सकते हैं]
+
+</p>
+
+`
+
++
+
+A([
+
+{
+type:"checkbox",
+name:"most_used_devices",
+value:"Personal phone",
+label:"Personal phone / व्यक्तिगत फोन"
+},
+
+{
+type:"checkbox",
+name:"most_used_devices",
+value:"Mother’s phone",
+label:"Mother’s phone / माता का फोन"
+},
+
+{
+type:"checkbox",
+name:"most_used_devices",
+value:"Father’s phone",
+label:"Father’s phone / पिता का फोन"
+},
+
+{
+type:"checkbox",
+name:"most_used_devices",
+value:"iPad",
+label:"iPad / आइपैड"
+},
+
+{
+type:"checkbox",
+name:"most_used_devices",
+value:"Laptop",
+label:"Laptop / लैपटॉप"
+},
+
+{
+type:"checkbox",
+name:"most_used_devices",
+value:"Computer",
+label:"Computer / कंप्यूटर"
+},
+
+{
+type:"checkbox",
+name:"most_used_devices",
+value:"Other",
+label:"Other / अन्य"
+}
+
+])
+
++
+
+`
+
+<div class="other-box">
+
+<label>
+If Other, please specify / यदि अन्य, तो कृपया लिखें
+</label>
+
+<input
+
+name="most_used_devices_other"
+
+type="text"
+
+placeholder=
+"Please specify / कृपया लिखें">
+
+</div>
+
+`
+
+},
+
+
+/* =========================================================
+   ACTIVE SCREEN TIME 5
+   DEVICE TIME PREFERENCE
+   ========================================================= */
+
+{
+
+title:
+"Active Screen Time Measurement 5 / स्क्रीन टाइम मापन 5",
+
+html:
+
+image(
+IMG.deviceTime,
+"When to use digital device"
+)
+
++
+
+`
+
+<p>
+
+When do you usually like to use digital devices?
+
+<br><br>
+
+आप आमतौर पर दिन के किस समय डिजिटल उपकरणों का उपयोग करते हैं?
+
+</p>
+
+`
+
++
+
+A([
+
+{
+type:"checkbox",
+name:"device_time_preference",
+value:"After waking",
+label:"After waking / जागने के बाद"
+},
+
+{
+type:"checkbox",
+name:"device_time_preference",
+value:"Before school",
+label:"Before school / स्कूल से पहले"
+},
+
+{
+type:"checkbox",
+name:"device_time_preference",
+value:"After school",
+label:"After school / स्कूल के बाद"
+},
+
+{
+type:"checkbox",
+name:"device_time_preference",
+value:"Late evening",
+label:"Late evening / देर शाम"
+},
+
+{
+type:"checkbox",
+name:"device_time_preference",
+value:"Before bed",
+label:"Before bed / सोने से पहले"
+}
+
+])
+
+},
+
+
+/* =========================================================
+   ACTIVE SCREEN TIME 6
+   TOTAL SCREEN TIME
+   ========================================================= */
+
+{
+
+title:
+"Active Screen Time Measurement 6 / स्क्रीन टाइम मापन 6",
+
+html:
+
+image(
+IMG.total,
+"Total screen time"
+)
+
++
+
+dualHours(
+
+"How much time do you spend using digital screens in total, including playing games, other fun activities, and studying?/ आप गेम खेलने, मनोरंजन और पढ़ाई सहित डिजिटल स्क्रीन का कुल कितने समय तक उपयोग करते हैं?",
+
+"total_screen_school_day",
+
+"total_screen_holiday"
+
+)
+
+},
+
+
+/* =========================================================
+   ACTIVE SCREEN TIME 7
+   COMBINED SCREEN BREAKS + SESSIONS + DURATION
+   ========================================================= */
+
+{
+
+title:
+"Active Screen Time Measurement 7 / स्क्रीन टाइम मापन 7",
+
+html:
+
+image(
+IMG.breaks,
+"Screen breaks"
+)
+
++
+
+`
+
+<p>
+
+<strong>
+1. Do you take breaks while using digital screens?
+</strong>
+
+<br>
+
+क्या आप डिजिटल स्क्रीन का उपयोग करते समय
+बीच-बीच में ब्रेक लेते हैं?
+
+</p>
+
+`
+
++
+
+A([
+
+{
+name:"screen_breaks",
+value:"Yes",
+label:"Yes / हाँ",
+required:true
+},
+
+{
+name:"screen_breaks",
+value:"No",
+label:"No / नहीं",
+required:true
+}
+
+])
+
++
+
+`
+
+<hr
+style="
+border:0;
+border-top:1px solid #d7e7f7;
+margin:28px 0;
+">
+
+`
+
++
+
+`
+<div id="screenBreakDetails" style="display:none;">
+`
+
++
+
+`
+
+<p>
+
+<strong>
+
+2. If yes, how many separate periods or sessions does
+you usually use digital screens during the day?
+
+</strong>
+
+<br>
+
+यदि हाँ, तो आप आमतौर पर दिन में कितनी अलग-अलग
+अवधि या सत्रों में डिजिटल स्क्रीन का उपयोग करता है?
+
+</p>
+
+`
+
++
+
+A([
+
+{
+name:"screen_sessions",
+value:"1 session",
+label:"1 session / 1 बार"
+},
+
+{
+name:"screen_sessions",
+value:"2 sessions",
+label:"2 sessions / 2 बार"
+},
+
+{
+name:"screen_sessions",
+value:"3 sessions",
+label:"3 sessions / 3 बार"
+},
+
+{
+name:"screen_sessions",
+value:"4 sessions",
+label:"4 sessions / 4 बार"
+},
+
+{
+name:"screen_sessions",
+value:"5 or more sessions",
+label:"5 or more sessions / 5 या अधिक बार"
+}
+
+])
+
++
+
+`
+
+<hr
+style="
+border:0;
+border-top:1px solid #d7e7f7;
+margin:28px 0;
+">
+
+
+<p>
+
+<strong>
+
+3. Please mention the approximate duration of each
+screen-use session.
+
+</strong>
+
+<br>
+
+कृपया डिजिटल स्क्रीन के उपयोग की प्रत्येक अवधि का
+अनुमानित समय लिखें।
+
+<br><br>
+
+Example: 1 hour in the morning and 3 hours in the evening.
+
+<br>
+
+उदाहरण: सुबह 1 घंटा और शाम को 3 घंटे।
+
+</p>
+
+
+<div class="grid">
+
+<div>
+
+<label>
+Morning / सुबह
+</label>
+
+<input
+name="screen_morning"
+type="text"
+placeholder="hours/minutes">
+
+</div>
+
+
+<div>
+
+<label>
+Afternoon / दोपहर
+</label>
+
+<input
+name="screen_afternoon"
+type="text"
+placeholder="hours/minutes">
+
+</div>
+
+
+<div>
+
+<label>
+Evening / शाम
+</label>
+
+<input
+name="screen_evening"
+type="text"
+placeholder="hours/minutes">
+
+</div>
+
+
+<div>
+
+<label>
+Night / रात
+</label>
+
+<input
+name="screen_night"
+type="text"
+placeholder="hours/minutes">
+
+</div>
+
+</div>
+
+</div>
+
+`
+
+},
+
+
+/* =========================================================
+   ACTIVE SCREEN TIME 8
+   RECREATIONAL SCREEN TIME
+   PURPOSE IMAGE
+   ========================================================= */
+
+{
+
+title:
+"Active Screen Time Measurement 8 / स्क्रीन टाइम मापन 8",
+
+html:
+
+image(
+IMG.purpose,
+"Purpose of recreational screen use"
+)
+
++
+
+dualHours(
+
+"How much total time do you spend using digital screens for recreational purposes? / आप मनोरंजन के लिए डिजिटल स्क्रीन का उपयोग करने में कुल कितना समय बिताते हैं?",
+
+"recreational_screen_school_day",
+
+"recreational_screen_holiday"
+
+)
+
+},
+
+
+/* =========================================================
+   ACTIVE SCREEN TIME 9
+   ACTIVE RECREATIONAL
+   ========================================================= */
+
+{
+
+title:
+"Active Screen Time Measurement 9 / स्क्रीन टाइम मापन 9",
+
+html:
+
+image(
+IMG.activeRecreational,
+"Active recreational screen time"
+)
++
+
+dualHours(
+
+"How much time do you spend actively using digital screens for fun and entertainment, such as playing games, making reels/videos, uploading posts, writing comments, chatting, or interacting with others on social media? / आप मनोरंजन के लिए डिजिटल स्क्रीन का सक्रिय रूप से उपयोग करने में कितना समय बिताते हैं? जैसे गेम खेलना, रील या वीडियो बनाना, पोस्ट अपलोड करना, कमेंट करना, चैट करना या सोशल मीडिया पर दूसरों के साथ जुड़ना।",
+
+"active_recreational_school_day",
+
+"active_recreational_holiday"
+
+)
+
+},
+
+
+/* =========================================================
+   ACTIVE SCREEN TIME 10
+   EDUCATIONAL SCREEN TIME
+   ========================================================= */
+
+{
+
+title:
+"Active Screen Time Measurement 10 / स्क्रीन टाइम मापन 10",
+
+html:
+
+image(
+IMG.educationalTime,
+"Educational screen time"
+)
+
++
+
+dualHours(
+
+"How much total time do you spend using digital screens for educational purposes? / आप शैक्षिक उद्देश्यों के लिए डिजिटल स्क्रीन का उपयोग करने में कुल कितना समय बिताता है?",
+
+"educational_screen_school_day",
+
+"educational_screen_holiday"
+
+)
+
+},
+
+
+/* =========================================================
+   ACTIVE SCREEN TIME 11
+   RECREATIONAL PURPOSE
+   ========================================================= */
+
+{
+
+title:
+"Active Screen Time Measurement 11 / स्क्रीन टाइम मापन 11",
+
+html:
+
+image(
+IMG.purpose,
+"Purpose of recreational digital-device use"
+)
+
++
+
+dualPurpose()
+
+},
+
+
+
+/* =========================================================
+   GREEN TIME MEASUREMENT 1
+   SES ENROLMENT
+   ========================================================= */
+{
+  title: "Green Time Measurement 1 / ग्रीन टाइम मापन 1",
+  html:
+    greenImage("SES.png", "Superhumane Evolutionary Scheme") +
+    `<p>Is you enrolled in the Superhumane Evolutionary Scheme (SES)? / क्या आप सुपरह्यूमन इवोल्यूशनरी स्कीम (SES) में नामांकित है?</p>` +
+    A([
+      {name:"ses_enrolled", value:"Yes", label:"Yes / हाँ", required:true},
+      {name:"ses_enrolled", value:"No", label:"No / नहीं", required:true}
+    ])
+},
+
+/* =========================================================
+   GREEN TIME MEASUREMENT 2
+   SES ENROLMENT DATE
+   ========================================================= */
+{
+  title: "Green Time Measurement 2 / ग्रीन टाइम मापन 2",
+  html:
+    greenImage("SES.png", "Superhumane Evolutionary Scheme") +
+    `<p>When did you enroll in the Superhumane Evolutionary Scheme (SES)? [Mention date] / आप सुपरह्यूमन इवोल्यूशनरी स्कीम (SES) में कब नामांकित हुआ? [तारीख लिखें]</p>
+     <label>Date of enrolment / नामांकन की तारीख</label>
+     <input type="date" name="ses_enrollment_date">`
+},
+
+/* =========================================================
+   GREEN TIME MEASUREMENT 3
+   SES DAILY FREQUENCY
+   ========================================================= */
+{
+  title: "Green Time Measurement 3 / ग्रीन टाइम मापन 3",
+  html:
+    greenImage("SES.png", "Superhumane Evolutionary Scheme") +
+    `<p>How often do you participate in SES during the day? / आप दिन में कितनी बार SES में भाग लेता है?</p>` +
+    A([
+      {name:"ses_daily_frequency", value:"One time in a day", label:"One time in a day / दिन में एक बार", required:true},
+      {name:"ses_daily_frequency", value:"Two times in a day", label:"Two times in a day / दिन में दो बार", required:true},
+      {name:"ses_daily_frequency", value:"All Shifts", label:"All Shifts / सभी पालियाँ", required:true}
+    ])
+},
+
+/* =========================================================
+   GREEN TIME MEASUREMENT 4
+   SES WEEKLY FREQUENCY
+   ========================================================= */
+{
+  title: "Green Time Measurement 4 / ग्रीन टाइम मापन 4",
+  html:
+    greenImage("SES.png", "Superhumane Evolutionary Scheme") +
+    `<p>How often do you participate in SES during the week? / आप सप्ताह में कितनी बार SES में भाग लेता है?</p>` +
+    A([
+      {name:"ses_weekly_frequency", value:"Never", label:"Never / कभी नहीं", required:true},
+      {name:"ses_weekly_frequency", value:"Rarely [1-2 times in a week]", label:"Rarely [1–2 times in a week] / कभी-कभार [सप्ताह में 1–2 बार]", required:true},
+      {name:"ses_weekly_frequency", value:"Sometimes [3-4 times in a week]", label:"Sometimes [3–4 times in a week] / कभी-कभी [सप्ताह में 3–4 बार]", required:true},
+      {name:"ses_weekly_frequency", value:"Often [5-6 times in a week]", label:"Often [5–6 times in a week] / अक्सर [सप्ताह में 5–6 बार]", required:true},
+      {name:"ses_weekly_frequency", value:"Daily", label:"Daily / प्रतिदिन", required:true}
+    ])
+},
+
+/* =========================================================
+   GREEN TIME MEASUREMENT 5
+   TOTAL NON-SCREEN RECREATIONAL TIME
+   ========================================================= */
+{
+  title: "Green Time Measurement 5 / ग्रीन टाइम मापन 5",
+  html:
+    greenImage("non screen.png", "Non-screen recreational activities") +
+    `<p>How much time do you spend each day doing fun activities without using a screen, such as playing outside, playing in a park or field, doing yoga, meditation, exercise, or spending time in nature? / आप रोज़ बिना स्क्रीन का उपयोग किए मनोरंजन के लिए कितने समय तक गतिविधियाँ करता है? जैसे बाहर खेलना, पार्क या मैदान में खेलना, योग करना, ध्यान लगाना, व्यायाम करना या प्रकृति के बीच समय बिताना?</p>
+     <div class="grid">
+       <div class="box"><h3>On school days / स्कूल के दिनों में</h3>
+         ${A([
+           ["0 hours","0 घंटे"],
+           ["0.5 hours","30 मिनट"],
+           ["1 hour","1 घंटा"],
+           ["1.5 hours","1 घंटा 30 मिनट"],
+           ["2 hours","2 घंटे"],
+           ["2.5 hours","2 घंटे 30 मिनट"],
+           ["3 hours","3 घंटे"],
+           ["3.5 hours","3 घंटे 30 मिनट"],
+           ["4 hours","4 घंटे"],
+           ["More than 4 hours","4 घंटे से अधिक"]
+         ].map(([en,hi])=>({name:"green_time_school_day",value:en,label:en+" / "+hi,required:true})))}
+       </div>
+       <div class="box"><h3>On holidays / छुट्टी के दिनों में</h3>
+         ${A([
+           ["0 hours","0 घंटे"],
+           ["0.5 hours","30 मिनट"],
+           ["1 hour","1 घंटा"],
+           ["1.5 hours","1 घंटा 30 मिनट"],
+           ["2 hours","2 घंटे"],
+           ["2.5 hours","2 घंटे 30 मिनट"],
+           ["3 hours","3 घंटे"],
+           ["3.5 hours","3 घंटे 30 मिनट"],
+           ["4 hours","4 घंटे"],
+           ["More than 4 hours","4 घंटे से अधिक"]
+         ].map(([en,hi])=>({name:"green_time_holiday",value:en,label:en+" / "+hi,required:true})))}
+       </div>
+     </div>`
+},
+
+/* =========================================================
+   GREEN TIME MEASUREMENT 6
+   PHYSICAL ACTIVITY
+   ========================================================= */
+{
+  title: "Green Time Measurement 6 / ग्रीन टाइम मापन 6",
+  html:
+    greenImage("non screen.png", "Physical activity") +
+    `<p>How much physical activity do you do after school or in the evening? For example, walking, dancing, exercising, cycling, or playing outdoor games. / आप स्कूल के बाद या शाम को कितनी शारीरिक गतिविधियाँ करता है? जैसे पैदल चलना, नाचना, व्यायाम करना, साइकिल चलाना या बाहर खेलना?</p>` +
+    A([
+      {name:"physical_activity",value:"0 hours",label:"0 hours / 0 घंटे",required:true},
+      {name:"physical_activity",value:"Less than 30 minutes",label:"Less than 30 minutes / 30 मिनट से कम",required:true},
+      {name:"physical_activity",value:"30 minutes",label:"30 minutes / 30 मिनट",required:true},
+      {name:"physical_activity",value:"1 hour",label:"1 hour / 1 घंटा",required:true},
+      {name:"physical_activity",value:"1.5 hours",label:"1.5 hours / 1 घंटा 30 मिनट",required:true},
+      {name:"physical_activity",value:"2 hours",label:"2 hours / 2 घंटे",required:true},
+      {name:"physical_activity",value:"2.5 hours",label:"2.5 hours / 2 घंटे 30 मिनट",required:true},
+      {name:"physical_activity",value:"3 hours",label:"3 hours / 3 घंटे",required:true},
+      {name:"physical_activity",value:"3.5 hours",label:"3.5 hours / 3 घंटे 30 मिनट",required:true},
+      {name:"physical_activity",value:"4 hours",label:"4 hours / 4 घंटे",required:true},
+      {name:"physical_activity",value:"More than 4 hours",label:"More than 4 hours / 4 घंटे से अधिक",required:true},
+      {name:"physical_activity",value:"Do not know / Do not want to answer",label:"Do not know / Do not want to answer / पता नहीं / उत्तर नहीं देना चाहते",required:true}
+    ])
+},
+
+/* =========================================================
+   GREEN TIME MEASUREMENT 7
+   SES ACTIVITIES
+   ========================================================= */
+{
+  title: "Green Time Measurement 7 / ग्रीन टाइम मापन 7",
+  html:
+    greenImage("SES.png", "Superhumane Evolutionary Scheme") +
+    `<p>What activities do you take part in at Superhumane Evolutionary Scheme (SES)? (You can select more than one option.)/ आप Superhumane Evolutionary Scheme (SES) के अंतर्गत कौन-कौन सी गतिविधियों में भाग लेता है? [आप एक से अधिक विकल्प चुन सकते हैं]</p>` +
+    A([
+      {type:"checkbox",name:"ses_activities",value:"Children Recreational Activities like chess carom etc.",label:"Children Recreational Activities like chess, carom, etc. / बच्चों की मनोरंजक गतिविधियाँ, जैसे शतरंज, कैरम आदि।"},
+      {type:"checkbox",name:"ses_activities",value:"Agricultural cum precision farming",label:"Agricultural cum precision farming / कृषि एवं प्रिसीजन फार्मिंग"},
+      {type:"checkbox",name:"ses_activities",value:"Dance",label:"Dance / नृत्य"},
+      {type:"checkbox",name:"ses_activities",value:"Gymnastics",label:"Gymnastics / जिम्नास्टिक"},
+      {type:"checkbox",name:"ses_activities",value:"Other",label:"Other / अन्य"}
+    ]) +
+    `<label>Please specify if other / यदि अन्य, तो कृपया बताएं</label>
+     <input type="text" name="ses_activities_other" placeholder="Please specify / कृपया बताएं">`
+},
+
+/* =========================================================
+   GREEN TIME MEASUREMENT 8
+   ACTIVITIES IN NATURAL SETTINGS
+   ========================================================= */
+{
+  title: "Green Time Measurement 8 / ग्रीन टाइम मापन 8",
+  html:
+    greenImage("non screen.png", "Non-screen recreational activities") +
+    `<p>What do you most often do in natural settings for recreational purposes? [You may select multiple options] / आप प्राकृतिक वातावरण में मनोरंजन के लिए सबसे अधिक क्या करता है? [आप एक से अधिक विकल्प चुन सकते हैं]</p>` +
+    A([
+      {type:"checkbox",name:"natural_recreational_activity",value:"Sports",label:"Sports / खेल"},
+      {type:"checkbox",name:"natural_recreational_activity",value:"Running",label:"Running / दौड़ना"},
+      {type:"checkbox",name:"natural_recreational_activity",value:"Cycling",label:"Cycling / साइकिल चलाना"},
+      {type:"checkbox",name:"natural_recreational_activity",value:"Walking",label:"Walking / पैदल चलना"},
+      {type:"checkbox",name:"natural_recreational_activity",value:"Active play",label:"Active play (like running after friends or playing local games) / सक्रिय खेल (जैसे दोस्तों के पीछे दौड़ना या स्थानीय खेल खेलना)"},
+      {type:"checkbox",name:"natural_recreational_activity",value:"Other",label:"Other / अन्य"}
+    ]) +
+    `<label>Please specify if other / यदि अन्य, तो कृपया बताएं</label>
+     <input type="text" name="natural_recreational_activity_other" placeholder="Please specify / कृपया बताएं">`
+},
+
+/* =========================================================
+   GREEN TIME MEASUREMENT 9
+   SCHOOL TRANSPORT
+   ========================================================= */
+{
+  title: "Green Time Measurement 9 / ग्रीन टाइम मापन 9",
+  html:
+    greenImage("Transport.png", "Modes of school transportation") +
+    `<p>How do you usually travel to and from school? / आप आमतौर पर स्कूल कैसे जाता और स्कूल से वापस कैसे आता है?</p>` +
+    A([
+      {name:"school_transport",value:"I walk all the way to school",label:"I walk all the way to school / मेरा बच्चा पूरे रास्ते पैदल स्कूल जाता/जाती है",required:true},
+      {name:"school_transport",value:"I walk at least 5 minutes to the bus, auto or rickshaw",label:"I walk at least 5 minutes to the bus, auto or rickshaw / मेरा बच्चा बस, ऑटो या रिक्शा तक कम से कम 5 मिनट पैदल जाता/जाती है",required:true},
+      {name:"school_transport",value:"I bicycle all the way to school",label:"I bicycle all the way to school / मेरा बच्चा पूरे रास्ते साइकिल से स्कूल जाता/जाती है",required:true},
+      {name:"school_transport",value:"I bicycle at least 5 minutes to the bus, auto or rickshaw",label:"I bicycle at least 5 minutes to the bus, auto or rickshaw / मेरा बच्चा बस, ऑटो या रिक्शा तक कम से कम 5 मिनट साइकिल से जाता/जाती है",required:true},
+      {name:"school_transport",value:"I go by car, bus, auto or rickshaw all the way",label:"I go by car, bus, auto or rickshaw all the way / मेरा बच्चा पूरे रास्ते कार, बस, ऑटो या रिक्शा से जाता/जाती है",required:true}
+    ]) +
+    `<label>Minutes/day on the way to school / स्कूल जाते समय मिनट/दिन</label>
+     <input type="number" name="travel_to_school_minutes" min="0" step="1" required>
+     <label>Minutes/day on the way home from school / स्कूल से घर वापस आते समय मिनट/दिन</label>
+     <input type="number" name="travel_from_school_minutes" min="0" step="1" required>`
+},
+
+/* =========================================================
+   GREEN TIME MEASUREMENT 10
+   PHYSICAL EDUCATION FREQUENCY
+   ========================================================= */
+{
+  title: "Green Time Measurement 10 / ग्रीन टाइम मापन 10",
+  html:
+    greenImage("sportsRoom.png", "School sports room and physical education activities") +
+    `<p>How many times do you attend physical education (PE)/games class at school each week? / आप स्कूल में हर सप्ताह शारीरिक शिक्षा (PE)/खेल की कक्षा में कितनी बार भाग लेता है?</p>` +
+    A([
+      {name:"pe_frequency",value:"Once",label:"Once / एक बार",required:true},
+      {name:"pe_frequency",value:"2 times/week",label:"2 times/week / सप्ताह में 2 बार",required:true},
+      {name:"pe_frequency",value:"3 times/week",label:"3 times/week / सप्ताह में 3 बार",required:true},
+      {name:"pe_frequency",value:"Daily",label:"Daily / प्रतिदिन",required:true},
+      {name:"pe_frequency",value:"None",label:"None / एक बार भी नहीं",required:true},
+      {name:"pe_frequency",value:"I do not have PE",label:"I do not have PE / मेरे बच्चे के स्कूल में PE की कक्षा नहीं होती है",required:true}
+    ])
+},
+
+/* =========================================================
+   GREEN TIME MEASUREMENT 11
+   ORGANIZED SPORTS OUTSIDE SCHOOL
+   ========================================================= */
+{
+  title: "Green Time Measurement 11 / ग्रीन टाइम मापन 11",
+  html:
+    greenImage("outsideGames.png", "Organized sports and recreational activities outside school") +
+    `<p>Do you take part in any sports, games, or other activities outside school (such as cricket coaching, dance classes, swimming, or music classes)? / क्या आप स्कूल के अलावा किसी खेल या अन्य गतिविधि में भाग लेता है? जैसे क्रिकेट की कोचिंग, डांस क्लास, तैराकी या संगीत की कक्षाएँ?</p>` +
+    A([
+      {name:"organized_sports_outside_school",value:"No",label:"No / नहीं",required:true},
+      {name:"organized_sports_outside_school",value:"Yes, once a week",label:"Yes, once a week / हाँ, सप्ताह में एक बार",required:true},
+      {name:"organized_sports_outside_school",value:"Yes, 1–2 times/week",label:"Yes, 1–2 times/week / हाँ, सप्ताह में 1–2 बार",required:true},
+      {name:"organized_sports_outside_school",value:"Yes, 2–3 times/week",label:"Yes, 2–3 times/week / हाँ, सप्ताह में 2–3 बार",required:true},
+      {name:"organized_sports_outside_school",value:"Yes, 3–4 times/week",label:"Yes, 3–4 times/week / हाँ, सप्ताह में 3–4 बार",required:true},
+      {name:"organized_sports_outside_school",value:"Yes, 4–5 times/week",label:"Yes, 4–5 times/week / हाँ, सप्ताह में 4–5 बार",required:true},
+      {name:"organized_sports_outside_school",value:"Yes, 5–6 times/week",label:"Yes, 5–6 times/week / हाँ, सप्ताह में 5–6 बार",required:true},
+      {name:"organized_sports_outside_school",value:"Yes, every day",label:"Yes, every day / हाँ, प्रतिदिन",required:true}
+    ])
+},
+
+/* =========================================================
+   SLEEP MEASURE 1
+   ========================================================= */
+
+{
+
+title:
+"Sleep Measure 1 / नींद मापन 1",
+
+html:
+
+largeImage(
+IMG.sleepHours,
+"Sleep hours"
+)
+
++
+
+dualSleep()
+
+},
+
+
+/* =========================================================
+   SLEEP MEASURE 2
+   ========================================================= */
+
+{
+
+title:
+"Sleep Measure 2 / नींद मापन 2",
+
+html:
+
+largeImage(
+IMG.wakeUp,
+"Wake-up time"
+)
+
++
+
+dualWake()
+
+},
+
+
+/* =========================================================
+   SLEEP MEASURE 3
+   ========================================================= */
+
+{
+
+title:
+"Sleep Measure 3 / नींद मापन 3",
+
+html:
+
+largeImage(
+IMG.sleepTime,
+"Sleep time"
+)
+
++
+
+dualBed()
+
+},
+
+
+/* =========================================================
+   SLEEP MEASURE 4
+   ========================================================= */
+
+{
+
+title:
+"Sleep Measure 4 / नींद मापन 4",
+
+html:
+
+largeImage(
+IMG.daytimeNap,
+"Daytime nap"
+)
+
++
+
+`
+
+<p>
+
+Do you take a nap or sleep during the daytime?
+
+<br>
+
+क्या आप दिन के समय झपकी लेता या सोता है?
+
+</p>
+
+`
+
++
+
+A([
+
+{
+name:"daytime_nap",
+value:"Yes",
+label:"Yes / हाँ",
+required:true
+},
+
+{
+name:"daytime_nap",
+value:"No",
+label:"No / नहीं",
+required:true
+}
+
+])
+
++
+
+`
+
+<label>
+
+If yes, approximately how many hours do you
+sleep during the day?
+
+<br>
+
+यदि हाँ, तो आप दिन में लगभग कितने घंटे सोता है?
+
+</label>
+
+<input
+
+name="daytime_sleep_hours"
+
+type="text"
+
+placeholder=
+"Enter approximate hours / लगभग घंटे लिखें">
+
+`
+
+}
+
+];
+
+
+/* =========================================================
+   TIME OPTIONS
+   ========================================================= */
+
+function opts(name){
+
+const durations = [
+  ["0 hours", "0 घंटे"],
+  ["0.5 hours", "30 मिनट"],
+  ["1 hour", "1 घंटा"],
+  ["1.5 hours", "1 घंटा 30 मिनट"],
+  ["2 hours", "2 घंटे"],
+  ["2.5 hours", "2 घंटे 30 मिनट"],
+  ["3 hours", "3 घंटे"],
+  ["3.5 hours", "3 घंटे 30 मिनट"],
+  ["4 hours", "4 घंटे"],
+  ["More than 4 hours", "4 घंटे से अधिक"]
+];
+
+return durations.map(([en,hi])=>({
+  name:name,
+  value:en,
+  label:en+" / "+hi,
+  required:true
+}));
+
+}
+
+
+/* =========================================================
+   DUAL HOURS
+   ========================================================= */
+
+function dualHours(q,n1,n2){
+
+return `
+
+<p>
+
+${q}
+
+</p>
+
+
+<div class="grid">
+
+
+<div class="box">
+
+<h3>
+
+On school days / स्कूल के दिनों में
+
+</h3>
+
+${A(opts(n1))}
+
+</div>
+
+
+<div class="box">
+
+<h3>
+
+On holidays / छुट्टी के दिनों में
+
+</h3>
+
+${A(opts(n2))}
+
+</div>
+
+
+</div>
+
+`;
+
+}
+
+
+/* =========================================================
+   SLEEP HOURS
+   ========================================================= */
+
+function dualSleep(){
+
+let options=[
+
+[
+"Less than 5 hours",
+"5 घंटे से कम"
+],
+
+[
+"6 hours",
+"6 घंटे"
+],
+
+[
+"7 hours",
+"7 घंटे"
+],
+
+[
+"8 hours",
+"8 घंटे"
+],
+
+[
+"More than 8 hours",
+"8 घंटे से अधिक"
+]
+
+];
+
+
+return dualFrom(
+
+options,
+
+"How many hours do you sleep? / आप कितने घंटे सोता है?",
+
+"sleep_hours_school_day",
+
+"sleep_hours_holiday"
+
+);
+
+}
+
+
+/* =========================================================
+   DUAL FROM
+   ========================================================= */
+
+function dualFrom(arr,q,n1,n2){
+
+return `
+
+<p>
+
+${q}
+
+</p>
+
+
+<div class="grid">
+
+
+<div class="box">
+
+<h3>
+
+On school days / स्कूल के दिनों में
+
+</h3>
+
+
+${A(
+
+arr.map(x=>({
+
+name:n1,
+
+value:x[0],
+
+label:x[0]+" / "+x[1],
+
+required:true
+
+}))
+
+)}
+
+
+</div>
+
+
+<div class="box">
+
+<h3>
+
+On holidays / छुट्टी के दिनों में
+
+</h3>
+
+
+${A(
+
+arr.map(x=>({
+
+name:n2,
+
+value:x[0],
+
+label:x[0]+" / "+x[1],
+
+required:true
+
+}))
+
+)}
+
+
+</div>
+
+
+</div>
+
+`;
+
+}
+
+
+/* =========================================================
+   WAKE-UP TIME
+   ========================================================= */
+
+function dualWake() {
+
+  let a = [
+    "Very early (3:00–5:00 AM) / बहुत जल्दी (सुबह 3:00–5:00 बजे)",
+    "Early (5:00–7:00 AM) / जल्दी (सुबह 5:00–7:00 बजे)",
+    "Late (after 7:00 AM) / देर से (सुबह 7:00 बजे के बाद)"
+  ];
+
+  return dualSame(
+    a,
+    "What time do you usually wake up in the morning? / आप आमतौर पर सुबह कितने बजे उठता है?",
+    "wake_time_school_day",
+    "wake_time_holiday"
+  );
+
+}
+
+
+/* =========================================================
+   SLEEP TIME
+   ========================================================= */
+
+function dualBed() {
+
+  let a = [
+    "Early (before 9:00 PM) / जल्दी (रात 9 बजे से पहले)",
+    "Normal (9:00–10:00 PM) / सामान्य समय (रात 9–10 बजे)",
+    "Late (after 10:00 PM) / देर से (रात 10 बजे के बाद)"
+  ];
+
+  return dualSame(
+    a,
+    "When do you usually go to sleep? / आप आमतौर पर रात को कितने बजे सोने जाता है?",
+    "bedtime_school_day",
+    "bedtime_holiday"
+  );
+
+}
+
+
+/* =========================================================
+   DUAL SAME
+   ========================================================= */
+
+function dualSame(a,q,n1,n2){
+
+return `
+
+<p>
+
+${q}
+
+</p>
+
+
+<div class="grid">
+
+
+<div class="box">
+
+<h3>
+
+On school days / स्कूल के दिनों में
+
+</h3>
+
+
+${A(
+
+a.map(x=>({
+
+name:n1,
+
+value:x,
+
+label:x,
+
+required:true
+
+}))
+
+)}
+
+
+</div>
+
+
+<div class="box">
+
+<h3>
+
+On holidays / छुट्टी के दिनों में
+
+</h3>
+
+
+${A(
+
+a.map(x=>({
+
+name:n2,
+
+value:x,
+
+label:x,
+
+required:true
+
+}))
+
+)}
+
+
+</div>
+
+
+</div>
+
+`;
+
+}
+
+
+/* =========================================================
+   RECREATIONAL PURPOSE
+   ========================================================= */
+
+function dualPurpose(){
+
+const a=[
+
+[
+"Video gaming",
+"वीडियो गेम खेलना"
+],
+
+[
+"Cognitive games (like chess, Sudoku, etc.)",
+"संज्ञानात्मक खेल (जैसे शतरंज, सुडोकू आदि)"
+],
+
+[
+"Active social media use (uploading dance videos, commenting, posting content, etc.)",
+"सोशल मीडिया का सक्रिय उपयोग (डांस वीडियो अपलोड करना, टिप्पणी करना, सामग्री पोस्ट करना आदि)"
+],
+
+[
+"Scrolling reels / watching videos passively",
+"रील्स स्क्रॉल करना / वीडियो निष्क्रिय रूप से देखना"
+],
+
+[
+"Other",
+"अन्य"
+]
+
+];
+
+
+return `
+
+<p>
+
+What is the main purpose for which you uses
+digital gadgets for recreation?
+
+<br>
+
+[You may select multiple options]
+
+<br><br>
+
+आप मनोरंजन के लिए डिजिटल गैजेट्स का उपयोग
+मुख्य रूप से किस उद्देश्य से करता है?
+
+<br>
+
+[आप एक से अधिक विकल्प चुन सकते हैं]
+
+</p>
+
+
+<div class="grid">
+
+
+<div class="box">
+
+<h3>
+
+On school days / स्कूल के दिनों में
+
+</h3>
+
+
+${A(
+
+a.map(x=>({
+
+type:"checkbox",
+
+name:
+"recreation_purpose_school_day",
+
+value:x[0],
+
+label:x[0]+" / "+x[1]
+
+}))
+
+)}
+
+
+<div class="other-box">
+
+<label>
+
+If Other, please specify / यदि अन्य, तो कृपया लिखें
+
+</label>
+
+<input
+
+name=
+"recreation_purpose_school_day_other"
+
+type="text"
+
+placeholder=
+"Please specify / कृपया लिखें">
+
+</div>
+
+
+</div>
+
+
+<div class="box">
+
+<h3>
+
+On holidays / छुट्टी के दिनों में
+
+</h3>
+
+
+${A(
+
+a.map(x=>({
+
+type:"checkbox",
+
+name:
+"recreation_purpose_holiday",
+
+value:x[0],
+
+label:x[0]+" / "+x[1]
+
+}))
+
+)}
+
+
+<div class="other-box">
+
+<label>
+
+If Other, please specify / यदि अन्य, तो कृपया लिखें
+
+</label>
+
+<input
+
+name=
+"recreation_purpose_holiday_other"
+
+type="text"
+
+placeholder=
+"Please specify / कृपया लिखें">
+
+</div>
+
+
+</div>
+
+
+</div>
+
+`;
+
+}
+
+
+/* =========================================================
+   INTRODUCTION
+   ========================================================= */
+
+let page=-1;
+
+const data={};
+
+
+const introHTML=`
+
+<div class="question">
+
+
+<h1>
+
+Student Questionnaire: Screen Time and Green Time /
+सक्रिय स्क्रीन टाइम और ग्रीन टाइम का मापन
+
+</h1>
+
+
+<div class="subtitle">
+
+<strong>
+Research Title:
+</strong>
+
+<br>
+
+Comparative Impact of Screen Time and Green Time on
+Proactive and Reactive Inhibitory Control among Middle
+Stage Students: An Event-Related Potential Analysis
+
+</div>
+
+
+<div class="box">
+
+<strong>
+Researcher:
+</strong>
+Tripti Sharma
+
+<br>
+
+<strong>
+Supervisor:
+</strong>
+Prof. Sona Ahuja
+
+<br>
+
+<strong>
+Department:
+</strong>
+Department of Pedagogical Sciences
+
+<br>
+
+<strong>
+Institution:
+</strong>
+Dayalbagh Educational Institute, Agra
+
+</div>
+
+
+<h2>
+
+Purpose / उद्देश्य
+
+</h2>
+
+
+<p>
+
+This form is designed to understand how much time you spends using digital screens and participating in outdoor and other screen-free activities. It includes activities related to both entertainment and education.
+
+The information collected will be used solely for
+academic research purposes.
+
+</p>
+
+
+<p>
+
+यह प्रश्नावली यह जानने के लिए बनाई गई है कि आप डिजिटल स्क्रीन का उपयोग करने और बाहर या बिना स्क्रीन वाली अन्य गतिविधियों में कितना समय बिताता है। इसमें मनोरंजन और पढ़ाई से जुड़ी दोनों प्रकार की गतिविधियाँ शामिल हैं।
+
+इस प्रपत्र से प्राप्त जानकारी का उपयोग केवल शैक्षणिक शोध उद्देश्यों के लिए किया जाएगा।
+
+</p>
+
+
+<h2>
+
+Instructions / निर्देश
+
+</h2>
+
+
+<ul class="instructions">
+
+
+<li>
+
+Please answer each question based on your usual screen-use habits and the time spent in outdoor and other screen-free activities.
+
+<br>
+
+कृपया प्रत्येक प्रश्न का उत्तर अपने बच्चे की डिजिटल स्क्रीन के उपयोग की आदतों और बाहर या बिना स्क्रीन वाली अन्य गतिविधियों में बिताए जाने वाले समय के आधार पर दें।
+
+</li>
+
+
+<li>
+
+Please consider your usual daily screen use and time spent in outdoor or other screen-free activities (green time), rather than an unusually high or low activity day.
+
+<br>
+
+कृपया अपने आपके डिजिटल स्क्रीन के सामान्य दैनिक उपयोग और बाहर या बिना स्क्रीन वाली गतिविधियों (ग्रीन टाइम) में बिताए जाने वाले समय को ध्यान में रखते हुए उत्तर दें। किसी असामान्य रूप से अधिक या कम गतिविधि वाले दिन को आधार न बनाएँ।
+
+</li>
+
+
+<li>
+
+Include the use of digital devices such as mobile phones, tablets, computers, laptops, and other digital screens. Also include time spent in outdoor activities, playing in parks or fields, exercising, doing yoga, or participating in other screen-free activities (green time).
+
+<br>
+
+मोबाइल फोन, टैबलेट, कंप्यूटर, लैपटॉप और अन्य डिजिटल उपकरणों के उपयोग को शामिल करें। साथ ही, बाहर खेलने, पार्क या मैदान में समय बिताने, व्यायाम करने, योग करने और बिना स्क्रीन वाली अन्य गतिविधियों (ग्रीन टाइम) में बिताए गए समय को भी शामिल करें।
+
+</li>
+
+
+<li>
+
+<strong>
+
+For recreational screen time, include playing video games, using social media, creating or posting content, commenting, chatting, and watching videos or reels; for green time, include outdoor games, walking, running, cycling, gardening, yoga, meditation, exercise, dancing, and spending time in parks, fields, or natural surroundings.
+
+</strong>
+
+<br>
+
+मनोरंजन के लिए स्क्रीन टाइम में वीडियो गेम खेलना, सोशल मीडिया का उपयोग करना, फोटो या वीडियो बनाना या अपलोड करना, कमेंट करना, चैट करना और वीडियो या रील्स देखना शामिल करें; ग्रीन टाइम में बाहर खेलना, पैदल चलना, दौड़ना, साइकिल चलाना, बागवानी करना, योग, ध्यान, व्यायाम, नृत्य करना और पार्क, मैदान या प्राकृतिक वातावरण में समय बिताना शामिल करें।
+
+</li>
+
+
+<li>
+
+For educational screen time, include activities such as attending online classes, studying, watching educational videos, reading, completing assignments, and other school-related learning activities using digital devices; for green time, include outdoor learning, nature walks, gardening, exploring plants and animals, and other learning activities in natural surroundings.
+
+<br>
+
+पढ़ाई के लिए स्क्रीन टाइम में ऑनलाइन कक्षाएँ लेना, पढ़ाई करना, शैक्षिक वीडियो देखना, पढ़ना, गृहकार्य पूरा करना और डिजिटल उपकरणों से जुड़ी अन्य शैक्षिक गतिविधियाँ शामिल करें; ग्रीन टाइम में बाहर पढ़ना, प्रकृति में घूमना, बागवानी करना, पेड़-पौधों और जानवरों के बारे में जानना तथा प्राकृतिक वातावरण में सीखने वाली अन्य गतिविधियाँ शामिल करें।
+
+</li>
+
+
+<li>
+
+Do not include time spent using digital devices for school activities during regular school hours, unless specifically asked in the question. For green time, include outdoor activities such as playing, walking, cycling, gardening, exercising, yoga, meditation, and spending time in parks, fields, or natural surroundings.
+
+<br>
+
+जब तक किसी प्रश्न में विशेष रूप से न पूछा जाए, नियमित स्कूल के समय में स्कूल की गतिविधियों के लिए डिजिटल उपकरणों के उपयोग का समय शामिल न करें। ग्रीन टाइम में बाहर खेलना, पैदल चलना, साइकिल चलाना, बागवानी करना, व्यायाम, योग, ध्यान करना और पार्क, मैदान या प्राकृतिक वातावरण में बिताया गया समय शामिल करें।
+
+</li>
+
+
+<li>
+
+Select the response that best represents your usual screen-use pattern and the time spent in outdoor or other screen-free activities (green time).
+
+<br>
+
+वह विकल्प चुनें जो आपके के डिजिटल स्क्रीन के सामान्य उपयोग और बाहर या बिना स्क्रीन वाली गतिविधियों (ग्रीन टाइम) में बिताए जाने वाले समय को सबसे अच्छी तरह दर्शाता है।
+
+</li>
+
+
+<li>
+
+There are no right or wrong answers. Please answer
+honestly and carefully based on your usual routine.
+
+<br>
+
+इसमें कोई सही या गलत उत्तर नहीं है। कृपया अपने
+आपकी सामान्य दिनचर्या के आधार पर ईमानदारी
+और सावधानीपूर्वक उत्तर दें।
+
+</li>
+
+
+<li>
+
+Please answer all questions.
+
+<br>
+
+कृपया सभी प्रश्नों के उत्तर स्वयं दें। यदि किसी प्रश्न का उत्तर नहीं पता है, तो शोधकर्ता से सहायता लें।
+
+</li>
+
+
+</ul>
+
+
+<h2>
+
+Note / ध्यान दें
+
+</h2>
+
+
+<p>
+
+Your responses will be kept confidential and will be
+used only for academic research purposes.
+
+<br>
+
+आपके द्वारा दी गई जानकारी को गोपनीय रखा जाएगा और
+इसका उपयोग केवल शैक्षणिक शोध उद्देश्यों के लिए किया जाएगा।
+
+</p>
+
+
+</div>
+
+`;
+
+
+/* =========================================================
+   COLLECT DATA
+   ========================================================= */
+
+function collect(){
+
+document.querySelectorAll(
+
+"#app input,#app select,#app textarea"
+
+).forEach(el=>{
+
+
+if(
+
+(el.type==="checkbox" ||
+el.type==="radio")
+
+&&
+
+!el.checked
+
+)
+
+return;
+
+
+if(el.name){
+
+
+if(el.type==="checkbox"){
+
+data[el.name]=
+
+data[el.name]
+
+?
+
+data[el.name]+", "+el.value
+
+:
+
+el.value;
+
+}
+
+else{
+
+data[el.name]=el.value;
+
+}
+
+}
+
+});
+
+}
+
+
+/* =========================================================
+   SCREEN BREAKS SHOW / HIDE LOGIC
+   ========================================================= */
+
+function setupScreenBreakLogic(){
+
+  const details =
+    document.getElementById("screenBreakDetails");
+
+  if(!details) return;
+
+  const radios =
+    document.querySelectorAll(
+      'input[name="screen_breaks"]'
+    );
+
+  function updateScreenBreakDetails(){
+
+    const answer =
+      document.querySelector(
+        'input[name="screen_breaks"]:checked'
+      );
+
+    const showDetails =
+      answer && answer.value === "Yes";
+
+    details.style.display =
+      showDetails ? "block" : "none";
+
+    if(!showDetails){
+
+      document
+        .querySelectorAll(
+          'input[name="screen_sessions"]'
+        )
+        .forEach(el => {
+          el.checked = false;
+        });
+
+      document
+        .querySelectorAll(
+          'input[name="screen_morning"],' +
+          'input[name="screen_afternoon"],' +
+          'input[name="screen_evening"],' +
+          'input[name="screen_night"]'
+        )
+        .forEach(el => {
+          el.value = "";
+        });
+    }
+  }
+
+  radios.forEach(radio => {
+
+    radio.addEventListener(
+      "change",
+      updateScreenBreakDetails
+    );
+
+  });
+
+  updateScreenBreakDetails();
+}
+   
+/* =========================================================
+   RENDER
+   ========================================================= */
+
+function render(){
+
+
+if(page===-1){
+
+
+document.getElementById("app")
+.innerHTML=introHTML;
+
+
+document.getElementById("nav")
+.style.display="flex";
+
+
+document.getElementById("back")
+.style.visibility="hidden";
+
+
+document.getElementById("next")
+.textContent=
+"Start Questionnaire / प्रश्नावली शुरू करें";
+
+
+document.getElementById("bar")
+.style.width="0%";
+
+
+return;
+
+}
+
+
+const q=questions[page];
+
+
+document.getElementById("app")
+.innerHTML=`
+
+<div class="question">
+
+
+<h2>
+
+${q.title}
+
+</h2>
+
+
+${q.html}
+
+
+<div
+id="err"
+class="error">
+
+Please answer the required question
+before continuing.
+
+<br>
+
+कृपया आगे बढ़ने से पहले आवश्यक
+प्रश्न का उत्तर दें।
+
+</div>
+
+
+</div>
+
+`;
+
+
+/* Restore previous answers */
+
+Object.keys(data).forEach(k=>{
+
+document
+
+.querySelectorAll(
+`[name="${CSS.escape(k)}"]`
+)
+
+.forEach(el=>{
+
+
+if(
+
+el.type==="checkbox" ||
+el.type==="radio"
+
+){
+
+el.checked=
+
+data[k]
+.split(", ")
+.includes(el.value);
+
+}
+
+else{
+
+el.value=data[k];
+
+}
+
+});
+
+});
+setupScreenBreakLogic();
+
+document.getElementById("back")
+.style.visibility=
+
+page===0
+?
+"hidden"
+:
+"visible";
+
+
+document.getElementById("next")
+.textContent=
+
+page===questions.length-1
+
+?
+
+"Submit / जमा करें"
+
+:
+
+"Next / आगे";
+
+
+document.getElementById("bar")
+.style.width=
+
+((page+1)/questions.length*100)+"%";
+
+}
+
+
+/* =========================================================
+   VALIDATION
+   ========================================================= */
+
+function valid(){
+
+
+const err=
+document.getElementById("err");
+
+
+/* Required text / number inputs */
+
+const requiredInputs=
+document.querySelectorAll(
+"#app input[required]"
+);
+
+
+for(const el of requiredInputs){
+
+
+if(
+el.type==="radio" ||
+el.type==="checkbox"
+)
+
+continue;
+
+
+if(!el.value.trim()){
+
+err.style.display="block";
+
+el.focus();
+
+return false;
+
+}
+
+}
+
+
+/* Radio groups */
+
+const radios=
+[
+
+...document.querySelectorAll(
+"#app input[type=radio]"
+)
+
+];
+
+
+const radioNames=
+[
+
+...new Set(
+radios.map(x=>x.name)
+)
+
+];
+
+
+for(const name of radioNames){
+
+    // If the participant selected "No" for screen breaks,
+    // do not require an answer for screen_sessions.
+    if(name === "screen_sessions"){
+
+        const screenBreakAnswer =
+        document.querySelector(
+            'input[name="screen_breaks"]:checked'
+        );
+
+        if(
+            screenBreakAnswer &&
+            screenBreakAnswer.value === "No"
+        ){
+            continue;
+        }
+    }
+
+    const checked =
+    document.querySelector(
+        `#app input[type=radio][name="${CSS.escape(name)}"]:checked`
+    );
+
+    if(!checked){
+
+        err.style.display="block";
+
+        return false;
+
+    }
+
+}
+
+
+return true;
+
+}
+
+
+/* =========================================================
+   NEXT
+   ========================================================= */
+
+function next(){
+
+
+if(page===-1){
+
+page=0;
+
+render();
+
+return;
+
+}
+
+
+if(!valid())
+return;
+
+
+collect();
+
+
+if(page<questions.length-1){
+
+page++;
+
+render();
+
+window.scrollTo(0,0);
+
+}
+
+else{
+
+submitForm();
+
+}
+
+}
+
+
+/* =========================================================
+   PREVIOUS
+   ========================================================= */
+
+function prev(){
+
+
+if(page===-1)
+return;
+
+
+collect();
+
+
+if(page>0){
+
+page--;
+
+render();
+
+window.scrollTo(0,0);
+
+}
+
+else{
+
+page=-1;
+
+render();
+
+}
+
+}
+
+
+/* =========================================================
+   SUBMIT
+   ========================================================= */
+
+async function submitForm(){
+
+
+document.getElementById("nav")
+.style.display="none";
+
+
+document.getElementById("app")
+.innerHTML=`
+
+<div class="success">
+
+<h1>
+
+Submitting… / जमा किया जा रहा है…
+
+</h1>
+
+<p>
+
+Please wait.
+
+</p>
+
+</div>
+
+`;
+
+
+/* =========================================================
+   TIMESTAMP
+   ========================================================= */
+
+const now=new Date();
+
+
+const months=[
+
+"Jan",
+"Feb",
+"Mar",
+"Apr",
+"May",
+"Jun",
+"Jul",
+"Aug",
+"Sep",
+"Oct",
+"Nov",
+"Dec"
+
+];
+
+
+const day=
+String(now.getDate())
+.padStart(2,"0");
+
+
+const month=
+months[now.getMonth()];
+
+
+const year=
+now.getFullYear();
+
+
+let hours=
+now.getHours();
+
+
+const minutes=
+String(now.getMinutes())
+.padStart(2,"0");
+
+
+const ampm=
+hours>=12
+?
+"PM"
+:
+"AM";
+
+
+hours=
+hours%12 || 12;
+
+
+const time=
+
+String(hours)
+.padStart(2,"0")
+
++
+":"
++
+minutes
++
+" "
++
+ampm;
+
+
+const timestamp=
+
+day
++
+"-"
++
+month
++
+"-"
++
+year
++
+" "
++
+time;
+
+
+data.submittedAt=
+timestamp;
+
+
+/* =========================================================
+   SEND TO GOOGLE SHEETS
+   ========================================================= */
+
+try{
+
+
+await fetch(
+
+SCRIPT_URL,
+
+{
+
+method:"POST",
+
+mode:"no-cors",
+
+headers:{
+
+"Content-Type":
+"text/plain;charset=utf-8"
+
+},
+
+body:
+JSON.stringify(data)
+
+}
+
+);
+
+
+/* SUCCESS */
+
+document.getElementById("app")
+.innerHTML=`
+
+<div class="success">
+
+<h1>
+
+Thank you! / धन्यवाद!
+
+</h1>
+
+
+<p>
+
+Your response has been submitted successfully.
+
+</p>
+
+
+<p>
+
+आपकी प्रतिक्रिया सफलतापूर्वक जमा हो गई है।
+
+</p>
+
+</div>
+
+`;
+
+
+}
+
+catch(e){
+
+
+document.getElementById("app")
+.innerHTML=`
+
+<div class="success">
+
+<h1>
+
+Submission completed
+
+</h1>
+
+
+<p>
+
+If you see this page, please inform the researcher
+to verify the response in the spreadsheet.
+
+</p>
+
+</div>
+
+`;
+
+}
+
+}
+
+
+/* =========================================================
+   START
+   ========================================================= */
+
+render();
+
+
+</script>
+
+
+</body>
+
+</html>
